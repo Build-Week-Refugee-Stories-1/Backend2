@@ -7,20 +7,20 @@ exports.up = function(knex) {
   
   admins
   .string('username', 128)
-  .notNullable()
+  
   .unique();
  
   admins
   .string('password', 128)
-  .notNullable();
  
-  admins
-  .integer("stories_id")
-  .notNullable()
-  .references("id")
-  .inTable("stories")
-  .onDelete("CASCADE")
-  .onUpdate("CASCADE");
+ 
+  // admins
+  // .integer("stories_id")
+  
+  // .references("id")
+  // .inTable("stories")
+  // .onDelete("CASCADE")
+  // .onUpdate("CASCADE");
     })
     .createTable('stories', stories => {
         stories
@@ -32,7 +32,7 @@ exports.up = function(knex) {
         .notNullable();
         
         stories
-        .text('story', 500)
+        .text('story', 255)
         .notNullable();
         
         stories
@@ -41,23 +41,29 @@ exports.up = function(knex) {
         
         stories
         .integer("admin_id")
-        .notNullable()
+      
         .references("id")
         .inTable("admins")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-      admins.timestamps(true, true);
+     
       stories
       .integer("portal_id")
       .notNullable()
       .references("id")
       .inTable("portal")
     })
-
-    
+    .createTable('portal', portal => {
+        portal
+        .increments();
+        
+    })
   };
   
-  exports.down = function(knex, Promise) {
-      return knex.schema.dropTableIfExists('admins');
+  exports.down = function(knex) {
+      return knex.schema
+      .dropTableIfExists('admins')
+      .dropTableIfExists('stories')
+      .dropTableIfExists('portal');
     
   };
