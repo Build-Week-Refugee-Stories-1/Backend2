@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Build-Week-Refugee-Stories-1/Backend2#readme",
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.7",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
